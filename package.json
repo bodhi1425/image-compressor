@@ -1,0 +1,20 @@
+{
+  "name": "image-compressor",
+  "private": true,
+  "version": "1.0.0",
+  "description": "图片压缩到指定大小 — 精确压到目标 KB，本地处理不上传",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "browser-image-compression": "^2.0.2"
+  },
+  "devDependencies": {
+    "typescript": "^6.0.3",
+    "vite": "^8.0.14"
+  }
+}

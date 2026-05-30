@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#edece8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>图片压缩到指定大小 — 压到精确 KB、本地不上传 | bodhi.tools</title>
+  <meta name="description" content="免费把图片精确压缩到目标大小(20/50/100/200KB 或自定义),证件照、考试报名、邮件附件刚需。100% 浏览器本地处理,文件不上传,无水印、不限次数、无需注册。" />
+  <meta name="keywords" content="图片压缩,图片压缩到指定大小,图片压缩到100kb,图片压缩到50kb,照片压缩,证件照压缩,图片压缩不上传,压缩图片到指定大小,在线图片压缩" />
+  <link rel="canonical" href="https://compress.bodhi.tools/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="图片压缩到指定大小 — 压到精确 KB、本地不上传" />
+  <meta property="og:description" content="把图片精确压缩到目标 KB,证件照/考试报名/邮件附件刚需。100% 本地处理,文件不上传。" />
+  <meta property="og:url" content="https://compress.bodhi.tools/" />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"图片压缩到指定大小","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"description":"把图片精确压缩到目标 KB,100% 浏览器本地处理,文件不上传。"}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"怎么把图片压缩到 100KB 以内?","acceptedAnswer":{"@type":"Answer","text":"上传图片后选择目标大小(如 100KB)或自己填一个 KB 值,点击压缩即可。工具会在你的浏览器本地不断逼近目标大小,压到不超过你设定的 KB。"}},{"@type":"Question","name":"我的图片会被上传到服务器吗?","acceptedAnswer":{"@type":"Answer","text":"不会。所有压缩都在你的浏览器本地完成,图片不会上传到任何服务器。可以打开开发者工具的网络面板验证,处理过程中没有上传请求。"}},{"@type":"Question","name":"压缩后清晰度会下降吗?","acceptedAnswer":{"@type":"Answer","text":"压到很小的目标(如 20KB)时,为了达到大小会降低画质;目标越宽松画质损失越小。证件照、报名表单、邮件附件等对大小有硬性要求的场景最适合。"}},{"@type":"Question","name":"支持哪些图片格式?有大小限制吗?","acceptedAnswer":{"@type":"Answer","text":"支持 JPG / PNG / WebP。因为在本地处理,没有像多数在线工具那样的上传大小上限,但超大图受设备内存约束,手机上处理过大的图可能较慢。"}}]}</script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="图片压缩 首页">
+        <span class="seal-mark" aria-hidden="true"><span>压</span></span>
+        <span><b>图片压缩</b><span class="sub mono">COMPRESS · BODHI.TOOLS</span></span>
+      </a>
+      <span class="trust" title="所有处理均在你的设备本地完成">
+        <span class="dot" aria-hidden="true"></span>
+        <span><span class="t-full">文件不上传 · </span>100% 本地处理</span>
+      </span>
+      <nav class="links" aria-label="导航">
+        <a href="https://bodhi.tools/tools">更多工具</a><a href="#how">原理</a><a href="#faq">常见问题</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker">COMPRESS IMAGE · 本地处理</span>
+          <h1>图片压缩到<br><em>你指定的大小</em></h1>
+          <p class="lead">把图片精确压缩到目标 KB——证件照、考试报名、邮件附件有大小限制时的刚需。全部在浏览器本地完成,文件不上传,免费、无水印、不限次数。</p>
+          <div class="badges">
+            <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 6v6c0 5 3.5 7.5 8 10 4.5-2.5 8-5 8-10V6l-8-4Z"/></svg>文件零上传</span>
+            <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>精确到 KB</span>
+            <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>无水印</span>
+            <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>不限次数</span>
+          </div>
+        </div>
+        <div class="seal" aria-hidden="true">
+          <div><div class="s-top">TARGET</div><div class="s-main">KB</div><div class="s-bot">ON-DEVICE</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" id="tool">
+      <div class="ws-head">
+        <h2>压缩到指定大小</h2>
+        <p>选一个目标大小,在你的浏览器本地把图片逼近到目标 KB——文件不上传。</p>
+      </div>
+      <label class="dropzone" id="dropzone">
+        <span class="dz-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span>
+        <div class="dz-title">拖入图片,或点击选择</div>
+        <div class="dz-hint">JPG / PNG / WebP · 文件不会上传</div>
+        <input type="file" id="fileInput" accept="image/*" />
+      </label>
+      <div id="panel" hidden>
+        <div class="orig-meta" id="origMeta"></div>
+        <div class="options">
+          <div class="field">
+            <label>目标大小</label>
+            <div class="segmented" id="presets">
+              <button type="button" data-kb="20">20KB</button>
+              <button type="button" data-kb="50">50KB</button>
+              <button type="button" data-kb="100" aria-pressed="true">100KB</button>
+              <button type="button" data-kb="200">200KB</button>
+              <button type="button" data-kb="500">500KB</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="customKB">自定义 (KB)</label>
+            <input type="number" id="customKB" placeholder="如 80" min="1" />
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" id="compressBtn" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 9 4 4m0 0v4m0-4h4"/><path d="m15 15 5 5m0 0v-4m0 4h-4"/></svg>压缩图片
+          </button>
+        </div>
+        <div class="statusline" id="status" role="status" aria-live="polite"></div>
+        <div class="result" id="result"></div>
+      </div>
+      <p class="notice">压缩在你的设备本地完成,图片不离开浏览器。目标越小画质损失越大;工具会逼近且不超过你设定的 KB。</p>
+    </section>
+
+    <aside class="ad" aria-label="广告"><span class="ad-tag">广告位 · Ad Slot</span></aside>
+
+    <section class="block" id="how">
+      <span class="kicker">HOW IT WORKS</span>
+      <h2>为什么用它压"到指定大小"</h2>
+      <p class="lede">多数图片压缩工具只是"尽量压小",但很多场景要的是<strong>精确不超过某个 KB</strong>——证件照上传(很多报名系统限 20–200KB)、邮件附件、论坛/政务表单。这个工具直接给目标 KB,本地逼近。</p>
+      <div class="steps">
+        <div class="step"><h3>选图片与目标大小</h3><p>拖入图片,选 20/50/100/200KB 或自己填。文件只进入当前网页。</p></div>
+        <div class="step"><h3>本地逼近目标</h3><p>在浏览器里反复压缩、逼近你设定的 KB,不上传服务器。</p></div>
+        <div class="step"><h3>下载结果</h3><p>满足大小要求后直接下载,关掉网页痕迹消失。</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="faq">
+      <span class="kicker">FAQ</span>
+      <h2>常见问题</h2>
+      <div class="faq">
+        <details open><summary>怎么把图片压缩到 100KB 以内?</summary><div class="ans">上传图片后选目标大小(如 100KB)或自己填一个 KB 值,点压缩即可。工具会在浏览器本地逼近目标,压到不超过你设定的 KB。</div></details>
+        <details><summary>我的图片会被上传到服务器吗?</summary><div class="ans">不会。全部在你的浏览器本地完成,图片不上传任何服务器。可在开发者工具网络面板验证,没有上传请求。</div></details>
+        <details><summary>压缩后清晰度会下降吗?</summary><div class="ans">压到很小(如 20KB)时为达到大小会降画质;目标越宽松损失越小。对大小有硬性要求的场景(证件照/附件)最适合。</div></details>
+        <details><summary>支持哪些格式?有大小限制吗?</summary><div class="ans">支持 JPG / PNG / WebP。本地处理没有上传大小上限,但超大图受设备内存约束,手机上处理过大图可能较慢。</div></details>
+      </div>
+    </section>
+
+    <aside class="ad" aria-label="广告"><span class="ad-tag">广告位 · Ad Slot</span></aside>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="f-brand">
+        <b>图片压缩 · bodhi.tools</b>
+        <p>把隐私放在第一位的免费图片压缩工具,所有处理都在你的浏览器本地完成。</p>
+      </div>
+      <nav aria-label="相关">
+        <a href="https://bodhi.tools/tools">全部工具</a>
+        <a href="https://pdf.bodhi.tools">PDF 工具箱</a>
+        <a href="https://bodhi.tools">bodhi.tools 首页</a>
+      </nav>
+      <div class="copy mono">© <span id="year"></span> bodhi.tools · 文件不上传 · No file leaves your device.</div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
