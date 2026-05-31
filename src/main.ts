@@ -102,23 +102,29 @@ compressBtn.addEventListener('click', async () => {
   resultEl.classList.remove('show');
   setStatus('正在本地压缩…');
   try {
-    const out = await imageCompression(file, {
-      maxSizeMB: targetKB / 1024,
-      useWebWorker: true,
-      maxIteration: 20,
-      maxWidthOrHeight: 4096,
-    });
+    const opts = { maxSizeMB: targetKB / 1024, useWebWorker: true, maxIteration: 30 };
+    let out = await imageCompression(file, opts);
+    // 没压到目标且原图非 JPEG → 转 JPEG 再压(PNG 无损压不到小目标, JPEG 能)
+    let converted = false;
+    if (out.size > targetKB * 1024 * 1.05 && file.type !== 'image/jpeg') {
+      setStatus('转 JPEG 进一步压缩…');
+      const jpg = await imageCompression(file, { ...opts, fileType: 'image/jpeg' });
+      if (jpg.size < out.size) { out = jpg; converted = true; }
+    }
     const ratio = Math.max(0, Math.round((1 - out.size / file.size) * 100));
-    const hit = out.size <= targetKB * 1024 * 1.02;
+    const hit = out.size <= targetKB * 1024 * 1.05;
     const url = URL.createObjectURL(out);
     const ext = (out.type.split('/')[1] || 'jpg').replace('jpeg', 'jpg');
     const base = file.name.replace(/\.[^.]+$/, '');
     const name = `${base}-${targetKB}kb.${ext}`;
     setStatus('压缩完成', 'ok');
+    const detail = hit
+      ? `已压到目标 ${targetKB} KB 以内${converted ? ' · 已转 JPG(透明背景变白)' : ''}`
+      : `已尽量逼近(${fmt(out.size)});再小会明显糊`;
     resultEl.innerHTML =
       `<span class="r-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></span>` +
       `<div class="r-text"><b>${fmt(file.size)} → ${fmt(out.size)} · 省 ${ratio}%</b>` +
-      `<div class="r-detail mono">${hit ? `已压到目标 ${targetKB} KB 以内` : '已尽量逼近(原图较小或格式限制)'}</div></div>` +
+      `<div class="r-detail mono">${detail}</div></div>` +
       `<a class="btn btn-primary" href="${url}" download="${name}">下载</a>`;
     resultEl.classList.add('show');
   } catch (e) {
