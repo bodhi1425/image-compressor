@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#edece8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <title>Compress Image to Exact KB (100KB / 50KB) — 100% Local, No Upload | bodhi.tools</title>
+  <meta name="description" content="Free tool to compress an image to an exact file size — 20/50/100/200KB or custom. Perfect for ID photos, online forms and email attachments. 100% in your browser, files never uploaded, no watermark, unlimited." />
+  <meta name="keywords" content="compress image to kb, compress image to 100kb, compress image to 50kb, compress image to 20kb, reduce image file size, compress jpg to size, image compressor, compress photo without upload" />
+  <link rel="canonical" href="https://compress.bodhi.tools/en/" />
+  <link rel="alternate" hreflang="en" href="https://compress.bodhi.tools/en/" />
+  <link rel="alternate" hreflang="zh-CN" href="https://compress.bodhi.tools/" />
+  <link rel="alternate" hreflang="x-default" href="https://compress.bodhi.tools/en/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Compress Image to Exact KB — 100% Local, No Upload" />
+  <meta property="og:description" content="Compress an image to an exact target KB — ID photos, forms, email attachments. 100% in-browser, files never uploaded." />
+  <meta property="og:url" content="https://compress.bodhi.tools/en/" />
+  <meta name="twitter:card" content="summary" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Compress Image to Exact KB","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"description":"Compress an image to an exact target file size, 100% in your browser, files never uploaded."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How do I compress an image to under 100KB?","acceptedAnswer":{"@type":"Answer","text":"Upload an image, pick a target size (e.g. 100KB) or type your own KB value, and click Compress. The tool keeps compressing locally in your browser until it is at or below your target."}},{"@type":"Question","name":"Are my images uploaded to a server?","acceptedAnswer":{"@type":"Answer","text":"No. All compression happens locally in your browser; images are never uploaded. You can verify in the Network tab of DevTools — there is no upload request."}},{"@type":"Question","name":"Will quality drop after compression?","acceptedAnswer":{"@type":"Answer","text":"Compressing to a very small target (like 20KB) lowers quality to hit the size; looser targets lose less. It is ideal when a size limit is mandatory — ID photos, forms, email attachments."}},{"@type":"Question","name":"Which formats are supported? Any size limit?","acceptedAnswer":{"@type":"Answer","text":"JPG / PNG / WebP. Since it runs locally there is no upload size cap, but very large images are limited by device memory and may be slow on phones."}}]}</script>
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "4338726b0b084af88125b1047cb29bdf"}'></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="/en/" aria-label="Image Compress home">
+        <span class="seal-mark" aria-hidden="true"><span>压</span></span>
+        <span><b>Image Compress</b><span class="sub mono">COMPRESS · BODHI.TOOLS</span></span>
+      </a>
+      <span class="trust" title="Everything runs locally on your device">
+        <span class="dot" aria-hidden="true"></span>
+        <span><span class="t-full">Files never uploaded · </span>100% local</span>
+      </span>
+      <nav class="links" aria-label="Nav">
+        <a href="https://bodhi.tools/tools">More tools</a><a href="#how">How</a><a href="#faq">FAQ</a><a href="/" class="lang-switch">中文</a>
+      </nav>
+    </div>
+  </header>
+
+  <a href="https://bodhi.tools" class="home-fab" aria-label="Back to bodhi.tools">← bodhi.tools</a>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <span class="kicker">COMPRESS IMAGE · On-device</span>
+          <h1>Compress an image to<br><em>any exact size</em></h1>
+          <p class="lead">Shrink any image to a precise target KB — the must-have when ID photos, online forms or email attachments enforce a size limit. Runs 100% in your browser, files never uploaded. Free, no watermark, unlimited.</p>
+          <div class="badges">
+            <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 6v6c0 5 3.5 7.5 8 10 4.5-2.5 8-5 8-10V6l-8-4Z"/></svg>No upload</span>
+            <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>Exact KB</span>
+            <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>No watermark</span>
+            <span class="pill"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Unlimited</span>
+          </div>
+        </div>
+        <div class="seal" aria-hidden="true">
+          <div><div class="s-top">TARGET</div><div class="s-main">KB</div><div class="s-bot">ON-DEVICE</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace" id="tool">
+      <div class="ws-head">
+        <h2>Compress to a target size</h2>
+        <p>Pick a target size and the tool shrinks your image toward that exact KB, locally — never uploaded.</p>
+      </div>
+      <label class="dropzone" id="dropzone">
+        <span class="dz-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span>
+        <div class="dz-title">Drop an image, or click to choose</div>
+        <div class="dz-hint">JPG / PNG / WebP · never uploaded</div>
+        <input type="file" id="fileInput" accept="image/*" />
+      </label>
+      <div id="panel" hidden>
+        <div class="orig-meta" id="origMeta"></div>
+        <div class="options">
+          <div class="field">
+            <label>Target size</label>
+            <div class="segmented" id="presets">
+              <button type="button" data-kb="20">20KB</button>
+              <button type="button" data-kb="50">50KB</button>
+              <button type="button" data-kb="100" aria-pressed="true">100KB</button>
+              <button type="button" data-kb="200">200KB</button>
+              <button type="button" data-kb="500">500KB</button>
+            </div>
+          </div>
+          <div class="field">
+            <label for="customKB">Custom (KB)</label>
+            <input type="number" id="customKB" placeholder="e.g. 80" min="1" />
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn btn-primary" id="compressBtn" disabled>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 9 4 4m0 0v4m0-4h4"/><path d="m15 15 5 5m0 0v-4m0 4h-4"/></svg>Compress
+          </button>
+        </div>
+        <div class="statusline" id="status" role="status" aria-live="polite"></div>
+        <div class="result" id="result"></div>
+      </div>
+      <p class="notice">Compression runs locally; the image never leaves your browser. Smaller targets cost more quality; the tool approaches but won't exceed your target KB.</p>
+    </section>
+
+    <aside class="ad" aria-label="Ad"><span class="ad-tag">广告位 · Ad Slot</span></aside>
+
+    <section class="block" id="how">
+      <span class="kicker">HOW IT WORKS</span>
+      <h2>Why compress "to an exact size"</h2>
+      <p class="lede">Most compressors just "make it smaller", but many situations need it to be <strong>under an exact KB</strong> — ID photo uploads (many systems cap at 20–200KB), email attachments, government / forum forms. This tool takes a target KB and approaches it, locally.</p>
+      <div class="steps">
+        <div class="step"><h3>Pick image & target</h3><p>Drop an image, choose 20/50/100/200KB or type your own. The file only enters this page.</p></div>
+        <div class="step"><h3>Approach locally</h3><p>It compresses repeatedly in your browser toward your target KB — no server.</p></div>
+        <div class="step"><h3>Download</h3><p>Once it meets the size, download it. Close the tab and nothing is left behind.</p></div>
+      </div>
+    </section>
+
+    <section class="block" id="faq">
+      <span class="kicker">FAQ</span>
+      <h2>FAQ</h2>
+      <div class="faq">
+        <details open><summary>How do I compress an image to under 100KB?</summary><div class="ans">Upload an image, pick a target (e.g. 100KB) or type a KB value, click Compress. It approaches your target locally and won't exceed the KB you set.</div></details>
+        <details><summary>Are my images uploaded to a server?</summary><div class="ans">No. Everything happens locally in your browser; images are never uploaded. You can verify in the DevTools Network tab — no upload request.</div></details>
+        <details><summary>Will quality drop after compression?</summary><div class="ans">A very small target (like 20KB) lowers quality to hit the size; looser targets lose less. Best for hard size limits (ID photos / attachments).</div></details>
+        <details><summary>Which formats? Any size limit?</summary><div class="ans">JPG / PNG / WebP. Local processing means no upload cap, but very large images are bound by device memory and may be slow on phones.</div></details>
+      </div>
+    </section>
+
+    <aside class="ad" aria-label="Ad"><span class="ad-tag">广告位 · Ad Slot</span></aside>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <div class="f-brand">
+        <b>Image Compress · bodhi.tools</b>
+        <p>A privacy-first free image compressor — everything runs locally in your browser.</p>
+      </div>
+      <nav aria-label="Related">
+        <a href="https://bodhi.tools/tools">All tools</a>
+        <a href="https://pdf.bodhi.tools">PDF toolbox</a>
+        <a href="https://bodhi.tools">bodhi.tools home</a>
+      </nav>
+      <div class="copy mono">© <span id="year"></span> bodhi.tools · No file leaves your device.</div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

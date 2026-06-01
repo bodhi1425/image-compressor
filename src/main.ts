@@ -3,6 +3,35 @@ import imageCompression from 'browser-image-compression';
 
 const $ = <T extends HTMLElement = HTMLElement>(s: string) => document.querySelector(s) as T;
 
+// 按页面语言切文案(中文页 lang=zh-CN → zh;英文页 lang=en → en)
+const L = (document.documentElement.lang || 'zh').toLowerCase().startsWith('en') ? 'en' : 'zh';
+const T = {
+  zh: {
+    pickImg: '请选择图片文件(JPG / PNG / WebP)',
+    target: (kb: number) => `目标 ${kb} KB · 点击「压缩图片」`,
+    compressing: '正在本地压缩…',
+    toJpeg: '转 JPEG 进一步压缩…',
+    done: '压缩完成',
+    hit: (kb: number, conv: boolean) => `已压到目标 ${kb} KB 以内${conv ? ' · 已转 JPG(透明背景变白)' : ''}`,
+    near: (s: string) => `已尽量逼近(${s});再小会明显糊`,
+    saved: (r: number) => `省 ${r}%`,
+    download: '下载',
+    fail: '压缩失败,请换张图片重试',
+  },
+  en: {
+    pickImg: 'Please choose an image (JPG / PNG / WebP)',
+    target: (kb: number) => `Target ${kb} KB · click "Compress"`,
+    compressing: 'Compressing locally…',
+    toJpeg: 'Converting to JPEG to compress further…',
+    done: 'Done',
+    hit: (kb: number, conv: boolean) => `Compressed to under ${kb} KB${conv ? ' · converted to JPG (transparent → white)' : ''}`,
+    near: (s: string) => `Got as close as possible (${s}); smaller would blur noticeably`,
+    saved: (r: number) => `saved ${r}%`,
+    download: 'Download',
+    fail: 'Compression failed — try another image',
+  },
+}[L];
+
 const fileInput = $<HTMLInputElement>('#fileInput');
 const dropzone = $('#dropzone');
 const panel = $('#panel');
@@ -32,7 +61,7 @@ function setStatus(msg: string, kind: 'ok' | 'err' | '' = '') {
 
 function loadFile(f: File) {
   if (!f.type.startsWith('image/')) {
-    setStatus('请选择图片文件(JPG / PNG / WebP)', 'err');
+    setStatus(T.pickImg, 'err');
     return;
   }
   file = f;
@@ -49,10 +78,9 @@ function loadFile(f: File) {
   compressBtn.disabled = false;
   resultEl.classList.remove('show');
   resultEl.innerHTML = '';
-  setStatus(`目标 ${targetKB} KB · 点击「压缩图片」`);
+  setStatus(T.target(targetKB));
 }
 
-// ---------- 上传:点击 + 拖拽 ----------
 fileInput.addEventListener('change', () => {
   const f = fileInput.files?.[0];
   if (f) loadFile(f);
@@ -76,14 +104,13 @@ dropzone.addEventListener('drop', (e) => {
   if (f) loadFile(f);
 });
 
-// ---------- 目标大小:预设 + 自定义 ----------
 presets.querySelectorAll('button').forEach((btn) => {
   btn.addEventListener('click', () => {
     presets.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', 'false'));
     btn.setAttribute('aria-pressed', 'true');
     targetKB = Number((btn as HTMLElement).dataset.kb);
     customKB.value = '';
-    if (file) setStatus(`目标 ${targetKB} KB · 点击「压缩图片」`);
+    if (file) setStatus(T.target(targetKB));
   });
 });
 customKB.addEventListener('input', () => {
@@ -91,23 +118,21 @@ customKB.addEventListener('input', () => {
   if (v > 0) {
     targetKB = v;
     presets.querySelectorAll('button').forEach((b) => b.setAttribute('aria-pressed', 'false'));
-    if (file) setStatus(`目标 ${targetKB} KB · 点击「压缩图片」`);
+    if (file) setStatus(T.target(targetKB));
   }
 });
 
-// ---------- 压缩 ----------
 compressBtn.addEventListener('click', async () => {
   if (!file) return;
   compressBtn.disabled = true;
   resultEl.classList.remove('show');
-  setStatus('正在本地压缩…');
+  setStatus(T.compressing);
   try {
     const opts = { maxSizeMB: targetKB / 1024, useWebWorker: true, maxIteration: 30 };
     let out = await imageCompression(file, opts);
-    // 没压到目标且原图非 JPEG → 转 JPEG 再压(PNG 无损压不到小目标, JPEG 能)
     let converted = false;
     if (out.size > targetKB * 1024 * 1.05 && file.type !== 'image/jpeg') {
-      setStatus('转 JPEG 进一步压缩…');
+      setStatus(T.toJpeg);
       const jpg = await imageCompression(file, { ...opts, fileType: 'image/jpeg' });
       if (jpg.size < out.size) { out = jpg; converted = true; }
     }
@@ -117,18 +142,16 @@ compressBtn.addEventListener('click', async () => {
     const ext = (out.type.split('/')[1] || 'jpg').replace('jpeg', 'jpg');
     const base = file.name.replace(/\.[^.]+$/, '');
     const name = `${base}-${targetKB}kb.${ext}`;
-    setStatus('压缩完成', 'ok');
-    const detail = hit
-      ? `已压到目标 ${targetKB} KB 以内${converted ? ' · 已转 JPG(透明背景变白)' : ''}`
-      : `已尽量逼近(${fmt(out.size)});再小会明显糊`;
+    setStatus(T.done, 'ok');
+    const detail = hit ? T.hit(targetKB, converted) : T.near(fmt(out.size));
     resultEl.innerHTML =
       `<span class="r-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg></span>` +
-      `<div class="r-text"><b>${fmt(file.size)} → ${fmt(out.size)} · 省 ${ratio}%</b>` +
+      `<div class="r-text"><b>${fmt(file.size)} → ${fmt(out.size)} · ${T.saved(ratio)}</b>` +
       `<div class="r-detail mono">${detail}</div></div>` +
-      `<a class="btn btn-primary" href="${url}" download="${name}">下载</a>`;
+      `<a class="btn btn-primary" href="${url}" download="${name}">${T.download}</a>`;
     resultEl.classList.add('show');
   } catch (e) {
-    setStatus((e as Error).message || '压缩失败,请换张图片重试', 'err');
+    setStatus((e as Error).message || T.fail, 'err');
   } finally {
     compressBtn.disabled = false;
   }
