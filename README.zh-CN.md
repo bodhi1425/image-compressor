@@ -20,7 +20,7 @@
 
 ## 实现原理
 
-[browser-image-compression](https://github.com/Donaldcwl/browser-image-compression) 在 canvas 上解码图片后重新编码，最多迭代 30 次，逐步降低质量和尺寸，直到结果符合目标。结果在目标的 5% 以内即视为达标；否则显示能压到的最接近大小。
+[browser-image-compression](https://github.com/Donaldcwl/browser-image-compression) 在 canvas 上解码图片后重新编码，逐步降低质量和尺寸，直到结果符合目标。如果库的迭代次数先用完，工具会从上次的结果接着压。结果不会超过目标：工具按 1 KB = 1000 字节计算，所以按 1024 字节计算大小的表单也不会超。实在压不到时，会明确提示并显示能压到的最小大小。
 
 ## 隐私说明
 

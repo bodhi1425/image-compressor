@@ -20,7 +20,7 @@ Compress a JPG, PNG or WebP image to a target file size (20 KB, 50 KB, 100 KB or
 
 ## How it works
 
-[browser-image-compression](https://github.com/Donaldcwl/browser-image-compression) decodes the image on a canvas and re-encodes it, reducing quality and dimensions over up to 30 iterations until the output fits the target. A result within 5% of the target counts as a hit; otherwise the tool reports the closest size it reached.
+[browser-image-compression](https://github.com/Donaldcwl/browser-image-compression) decodes the image on a canvas and re-encodes it, reducing quality and dimensions until the output fits the target. If the library runs out of iterations first, the tool keeps compressing from its last result. The output never exceeds the target: the tool counts 1 KB as 1,000 bytes, so the file also passes forms that count 1 KB as 1,024 bytes. If an image can't get that small, the tool says so and shows the smallest size it reached.
 
 ## Privacy
 
